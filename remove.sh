@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm a.out lex.yy.c
+rm a.out lex.yy.c *.tab.*
