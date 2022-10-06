@@ -1,4 +1,13 @@
+# Ignore execution files without extension.
+*
+!*.*
+!*/
+
+# Unignore file if necessary.
+!Makefile
+
 a.out
 lex.yy.c
 
+*.o
 *.tab.*
