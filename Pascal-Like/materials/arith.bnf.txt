@@ -1,0 +1,14 @@
+<lines> ::= <line> <lines>
+        | <line>
+
+<line>  ::= <expr> "\n"
+
+<expr>  ::= <expr> "+" <term>
+        | <term>
+
+<term>  ::= <term> "*" <factor>
+        | <factor>
+
+<factor>::= "(" <expr> ")"
+        | <number>
+

@@ -1,0 +1,82 @@
+<pascal_like compiler>
+
+1. Lexical #1
+
+$ cd
+$ mkdir pascal-like
+$ cd pascal-like
+
+$ flex pascal-like.l
+$ gcc -o pascal-like lex.yy.c -lfl
+$ gcc -o -DPRINT pascal-like lex.yy.c -lfl
+$ ./pascal-like
+:=
+begin
+end
+if
+then
+else
+while 
+do
+^Z
+
+
+2. Lexical #2
+- BNF -> bison
+
+$ flex pascal-like.l
+$ bison pascal-like.y
+
+
+3. Conflict/Shift error debug
+
+$ bison pascal-like.y
+$ bison -v pascal-like.y
+$ ls -l
+$ vi pascal-like.output
+: set number
+
+$ vi pascal-like.y
+expr            : expr binaryOp expr
+-> 
+expr         	: value binaryOp expr
+
+$ bison -v pascal-like.y
+$ vi pascal-like.y
+if_statement    : if condition then statement
+                | if condition then statement else statement
+                ;
+->
+if_statement    : if condition then statement
+		;
+
+$ bison -v pascal-like.y
+
+
+4. flex bison together
+
+$ vi pascal-like.l
+G > a
+#include "lex.yy.c"
+
+$ flex pascal-like.l
+$ bison pascal-like.y
+$ gcc -o parser pascal-like.tab.c -lfl
+$ vi pascal-like.l
+begin -> begin_T
+end -< end_T
+$ vi pascal-like.y
+begin -> begin_T
+end -< end_T
+
+$ flex pascal-like.l
+$ bison pascal-like.y
+$ gcc -o parser pascal-like.tab.c -lfl
+
+$ ./parser < test_program.pas
+$ 
+
+
+
+
+
