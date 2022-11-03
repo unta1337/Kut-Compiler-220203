@@ -18,11 +18,12 @@
 
 begin TOKEN(begin)
 end   TOKEN(end)
-if    TOKEN(if)
+if    TOKEN(iif)
 then  TOKEN(then)
-else  TOKEN(else)
-while TOKEN(while)
-do    TOKEN(do)
+else  TOKEN(eelse)
+while TOKEN(whiile)
+do    TOKEN(doo)
 
-.     printf("Unrecognizable character. %s\n", yytext);
+[ \t]  { }
+.     printf("Unrecognizable character: \"%s\"\n", yytext);
 %%
