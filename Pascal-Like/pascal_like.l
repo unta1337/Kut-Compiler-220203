@@ -2,9 +2,9 @@
     #include "pascal_like.tab.h"
 
     #ifdef PRINT
-    #define TOKEN(t) printf("Token: " #t "\n");
+    #define TOKEN(t) { printf("Token: " #t "\n"); return (t); }
     #else
-    #define TOKEN(t) return (t);
+    #define TOKEN(t) { return (t); }
     #endif
 %}
 
@@ -15,7 +15,7 @@ number {digit}+
 id     {letter}({letter}|{digit})*
 
 %%
-";"  return SEMICOLON;
+";"  TOKEN(SEMICOLON)
 ":=" TOKEN(ASSIGN)
 "<"  TOKEN(LESS_THAN)
 ">"  TOKEN(GREATER_THAN)
@@ -33,6 +33,7 @@ do    TOKEN(doo)
 {number} TOKEN(NUMBER)
 {id}     TOKEN(ID)
 
-[ \t]  { }
-.     printf("Unrecognizable character: \"%s\"\n", yytext);
+(\n|\r\n) { /* LF CRLF */ printf("\n"); }
+[ \t]     { /* White spaces */ }
+.         printf("Unrecognizable character: \"%s\"\n", yytext);
 %%
