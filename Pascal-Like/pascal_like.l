@@ -8,6 +8,10 @@
     #endif
 %}
 
+line_feed           (\n|\r\n)
+single_line_comment \/\/.*{line_feed}
+multi_line_comment  \/\*(.|{line_feed})*\*\/
+
 digit  [0-9]
 letter [a-zA-z]
 
@@ -33,7 +37,10 @@ do    TOKEN(doo)
 {number} TOKEN(NUMBER)
 {id}     TOKEN(ID)
 
-(\n|\r\n) { /* LF CRLF */ printf("\n"); }
+{line_feed}           { }
+{single_line_comment} { }
+{multi_line_comment}  { }
+
 [ \t]     { /* White spaces */ }
 .         printf("Unrecognizable character: \"%s\"\n", yytext);
 %%

@@ -29,7 +29,7 @@
         ;
 
     statements:
-        statement SEMICOLON
+        statement
         | statement SEMICOLON statements
         ;
 
@@ -45,7 +45,7 @@
         ;
 
     while_statement:
-        whiile condition doo
+        whiile condition doo statement
         ;
 
     assign_statement:
