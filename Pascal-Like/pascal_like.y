@@ -44,7 +44,6 @@
 
     if_statement:
         iif condition then statement
-        | iif condition then statement eelse statement
         ;
 
     while_statement:
@@ -65,7 +64,7 @@
         ;
 
     expr:
-        expr binaryOp expr
+        value binaryOp expr
         | value
         ;
 
