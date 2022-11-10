@@ -4,7 +4,7 @@ OBJECTS = lex.yy.c pascal_like.tab.c
 HEADERS = pascal_like.tab.h
 
 $(TARGET): $(MAIN) $(OBJECTS)
-	gcc -o $@ $^ -lfl -DYYDEBUG
+	gcc -o $@ $^ -lfl
 
 lex.yy.c: pascal_like.l
 	flex $^
