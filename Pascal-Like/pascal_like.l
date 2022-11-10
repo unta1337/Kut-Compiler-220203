@@ -1,11 +1,11 @@
 %{
-#define PRINT
+    #include "pascal_like.tab.h"
 
-#ifdef PRINT
-#define TOKEN(t) printf("Token: " #t "\n");
-#else
-#define TOKEN(t) return(t);
-#endif
+    #ifdef PRINT
+    #define TOKEN(t) printf("Token: " #t "\n");
+    #else
+    #define TOKEN(t) return (t);
+    #endif
 %}
 
 digit  [0-9]
@@ -15,7 +15,7 @@ number {digit}+
 id     {letter}({letter}|{digit})*
 
 %%
-";"  TOKEN(SEMICOLON)
+";"  return SEMICOLON;
 ":=" TOKEN(ASSIGN)
 "<"  TOKEN(LESS_THAN)
 ">"  TOKEN(GREATER_THAN)

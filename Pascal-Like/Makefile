@@ -1,9 +1,10 @@
 TARGET = pascal-like
+MAIN = main.c
 OBJECTS = lex.yy.c pascal_like.tab.c
 HEADERS = pascal_like.tab.h
 
-$(TARGET): $(OBJECTS)
-	gcc -o $@ $^ -lfl
+$(TARGET): $(MAIN) $(OBJECTS)
+	gcc -o $@ $^ -lfl -DYYDEBUG
 
 lex.yy.c: pascal_like.l
 	flex $^

@@ -1,10 +1,8 @@
 %{
     #include <stdio.h>
 
-    extern char* yytext;
-
-    void yyerror(char*);
-    int yylex(void);
+    extern void yyerror(char*);
+    extern int yylex(void);
 %}
 
 %token SEMICOLON
@@ -78,15 +76,3 @@
         | ID
         ;
 %%
-
-int main(int argc, char* argv[])
-{
-    yyparse();
-}
-
-void yyerror(char* str)
-{
-    fprintf(stderr, "error: %s\n", str);
-    fprintf(stderr, "       \"%s\"\n", yytext);
-    fprintf(stderr, "       [%d]\n", *yytext);
-}
