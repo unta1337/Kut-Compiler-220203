@@ -8,13 +8,19 @@
 #endif
 %}
 
+digit  [0-9]
+letter [a-zA-z]
+
+number {digit}+
+id     {letter}({letter}|{digit})*
+
 %%
-";"   TOKEN(SEMICOLON)
-":="  TOKEN(ASSIGN)
-"<"   TOKEN(LESS_THAN)
-">"   TOKEN(GREATER_THAN)
-"+"   TOKEN(PLUS)
-"-"   TOKEN(MINUS)
+";"  TOKEN(SEMICOLON)
+":=" TOKEN(ASSIGN)
+"<"  TOKEN(LESS_THAN)
+">"  TOKEN(GREATER_THAN)
+"+"  TOKEN(PLUS)
+"-"  TOKEN(MINUS)
 
 begin TOKEN(begin)
 end   TOKEN(end)
@@ -23,6 +29,9 @@ then  TOKEN(then)
 else  TOKEN(eelse)
 while TOKEN(whiile)
 do    TOKEN(doo)
+
+{number} TOKEN(NUMBER)
+{id}     TOKEN(ID)
 
 [ \t]  { }
 .     printf("Unrecognizable character: \"%s\"\n", yytext);
